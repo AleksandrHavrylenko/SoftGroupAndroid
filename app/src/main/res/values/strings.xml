@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">SoftGroupAndroid</string>
+    <string name="login">Sign in</string>
+    <string name="register">Sign up</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="invalid_password">Invalid password</string>
+    <string name="logout">Logout</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="hint_email">Enter email</string>
+    <string name="hint_password">Enter password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="hint_confirm_password">Enter password again</string>
+    <string name="welcome_user_email">Welcome, %s !</string>
+    <string name="error">Error</string>
+    <string name="err_short_password">Password must be at least 4 characters</string>
+    <string name="err_short_email">Email must be at least 6 characters</string>
+    <string name="err_pass_not_equals">Passwords do not match</string>
+    <string name="err_user_exists">User with this email already exists</string>
+    <string name="successful_registration">Successful registration</string>
+    <string name="my_account">My account</string>
+</resources>
