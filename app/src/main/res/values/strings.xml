@@ -5,7 +5,7 @@
     <string name="invalid_email">Invalid email</string>
     <string name="invalid_password">Invalid password</string>
     <string name="logout">Logout</string>
-    <string name="email">Email</string>
+    <string name="email" translatable="false">Email</string>
     <string name="password">Password</string>
     <string name="hint_email">Enter email</string>
     <string name="hint_password">Enter password</string>
@@ -19,4 +19,5 @@
     <string name="err_user_exists">User with this email already exists</string>
     <string name="successful_registration">Successful registration</string>
     <string name="my_account">My account</string>
+    <string name="not_valid_email">Not valid email</string>
 </resources>

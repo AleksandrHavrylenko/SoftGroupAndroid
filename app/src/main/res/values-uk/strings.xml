@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SoftGroupAndroid</string>
+    <string name="confirm_password">Підтвердіть пароль</string>
+    <string name="err_pass_not_equals">Паролі не співпадають</string>
+    <string name="err_short_email">Email повинен містити не менше 6 символів</string>
+    <string name="err_short_password">Пароль повинен містити не менше 4 символів</string>
+    <string name="err_user_exists">Користувач з такою поштою вже зареєстрований</string>
+    <string name="error">Помилка</string>
+    <string name="hint_confirm_password">Введіть пароль ще раз</string>
+    <string name="hint_email">Введіть email</string>
+    <string name="hint_password">Введіть пароль</string>
+    <string name="invalid_email">Невірна пошта</string>
+    <string name="invalid_password">Невірний пароль</string>
+    <string name="login">Вхід</string>
+    <string name="logout">Вийти</string>
+    <string name="my_account">Мій профіль</string>
+    <string name="password">Пароль</string>
+    <string name="register">Реестрація</string>
+    <string name="successful_registration">Успішна реестрація</string>
+    <string name="welcome_user_email">Ласкаво просимо %s !</string>
+    <string name="not_valid_email">Пошта не пройшла валідацію</string>
+</resources>
