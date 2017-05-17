@@ -1,7 +1,9 @@
 package ua.sg.academy.havrulenko.android.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
@@ -15,6 +17,7 @@ import ua.sg.academy.havrulenko.android.dao.UsersDaoInterface;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static final String KEY_SESSION_EMAIL = "session_email";
     private static final String TAG = MainActivity.class.getSimpleName();
     private EditText editTextEmail;
     private EditText editTextPassword;
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadSession();
         setContentView(R.layout.activity_main);
         findViews();
         buttonLogin.setOnClickListener(this);
@@ -61,8 +65,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(dao.contains(email)) {
             String pass = dao.getPasswordByEmail(email);
             if(pass.equals(hash)) {
+                saveSession(email);
                 Intent intent = new Intent(MainActivity.this, SuccessLoginActivity.class);
-                intent.putExtra("email", email);
+                intent.putExtra(KEY_SESSION_EMAIL, email);
                 startActivity(intent);
             } else {
                 String msg = getResources().getString(R.string.invalid_password);
@@ -71,6 +76,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             String msg = getResources().getString(R.string.invalid_email);
             DialogFragment.newInstance(msg).show(getSupportFragmentManager(), msg);
+        }
+    }
+
+    private void saveSession(String email){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_SESSION_EMAIL, email);
+        editor.apply();
+    }
+
+    private void loadSession(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String  data = sharedPreferences.getString(KEY_SESSION_EMAIL, "") ;
+        if(!data.isEmpty()) {
+            Intent intent = new Intent(this, SuccessLoginActivity.class);
+            intent.putExtra(KEY_SESSION_EMAIL, data);
+            startActivity(intent);
+            finish();
+        } else {
+            Log.d(TAG, "Session not saved");
         }
     }
 
