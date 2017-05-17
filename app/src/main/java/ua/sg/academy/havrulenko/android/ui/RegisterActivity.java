@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import ua.sg.academy.havrulenko.android.R;
 import ua.sg.academy.havrulenko.android.CurrentStorage;
+import ua.sg.academy.havrulenko.android.R;
 import ua.sg.academy.havrulenko.android.dao.UsersDaoInterface;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -55,6 +55,11 @@ public class RegisterActivity extends AppCompatActivity {
             DialogFragment.newInstance(msg).show(getSupportFragmentManager(), msg);
             return;
         }
+        if(!isValidEmailAddress(email)) {
+            String msg = getResources().getString(R.string.not_valid_email);
+            DialogFragment.newInstance(msg).show(getSupportFragmentManager(), msg);
+            return;
+        }
         if (dao.contains(email)) {
             String msg = getResources().getString(R.string.err_user_exists);
             DialogFragment.newInstance(msg).show(getSupportFragmentManager(), msg);
@@ -78,6 +83,13 @@ public class RegisterActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    public boolean isValidEmailAddress(String email) {
+        String pattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(pattern);
+        java.util.regex.Matcher m = p.matcher(email);
+        return m.matches();
     }
 
     @Override
