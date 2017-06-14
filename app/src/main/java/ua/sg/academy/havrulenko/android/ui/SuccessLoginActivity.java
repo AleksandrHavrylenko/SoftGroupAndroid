@@ -5,8 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import ua.sg.academy.havrulenko.android.R;
@@ -20,7 +20,7 @@ public class SuccessLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_success_login);
         TextView textViewEmail = (TextView) findViewById(R.id.textViewUserEmail);
-        AppCompatButton buttonLogout = (AppCompatButton) findViewById(R.id.buttonLogout);
+        Button buttonLogout = (Button) findViewById(R.id.buttonLogout);
         String email = getIntent().getStringExtra(KEY_SESSION_EMAIL);
         textViewEmail.setText(getResources().getString(R.string.welcome_user_email, email));
         buttonLogout.setOnClickListener(new View.OnClickListener() {

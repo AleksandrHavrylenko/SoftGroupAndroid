@@ -3,9 +3,9 @@ package ua.sg.academy.havrulenko.android.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,7 +18,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText editTextEmail;
     private EditText editTextPass;
     private EditText editTextConfirmPass;
-    private AppCompatButton buttonRegister;
+    private Button buttonRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPass = (EditText) findViewById(R.id.editTextPassword);
         editTextConfirmPass = (EditText) findViewById(R.id.editTextConfirmPassword);
-        buttonRegister = (AppCompatButton) findViewById(R.id.buttonRegister);
+        buttonRegister = (Button) findViewById(R.id.buttonRegister);
     }
 
     private void onClickRegister() {
@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
             DialogFragment.newInstance(msg).show(getSupportFragmentManager(), msg);
             return;
         }
-        if(!isValidEmailAddress(email)) {
+        if (!isValidEmailAddress(email)) {
             String msg = getResources().getString(R.string.not_valid_email);
             DialogFragment.newInstance(msg).show(getSupportFragmentManager(), msg);
             return;
@@ -85,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public boolean isValidEmailAddress(String email) {
+    private boolean isValidEmailAddress(String email) {
         String pattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(pattern);
         java.util.regex.Matcher m = p.matcher(email);

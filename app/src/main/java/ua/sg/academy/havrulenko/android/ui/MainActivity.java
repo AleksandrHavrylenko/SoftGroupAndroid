@@ -5,14 +5,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
+import ua.sg.academy.havrulenko.android.CurrentStorage;
 import ua.sg.academy.havrulenko.android.HashUtils;
 import ua.sg.academy.havrulenko.android.R;
-import ua.sg.academy.havrulenko.android.CurrentStorage;
 import ua.sg.academy.havrulenko.android.dao.UsersDaoInterface;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = MainActivity.class.getSimpleName();
     private EditText editTextEmail;
     private EditText editTextPassword;
-    private AppCompatButton buttonLogin;
-    private AppCompatButton buttonRegister;
+    private Button buttonLogin;
+    private Button buttonRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void findViews() {
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        buttonLogin = (AppCompatButton) findViewById(R.id.buttonLogin);
-        buttonRegister = (AppCompatButton) findViewById(R.id.buttonRegister);
+        buttonLogin = (Button) findViewById(R.id.buttonLogin);
+        buttonRegister = (Button) findViewById(R.id.buttonRegister);
     }
 
     private void onClickLogin() {
@@ -62,9 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d(TAG, "onClickLogin: hash:" + hash);
 
         UsersDaoInterface dao = CurrentStorage.getCurrent();
-        if(dao.contains(email)) {
+        if (dao.contains(email)) {
             String pass = dao.getPasswordByEmail(email);
-            if(pass.equals(hash)) {
+            if (pass.equals(hash)) {
                 saveSession(email);
                 Intent intent = new Intent(MainActivity.this, SuccessLoginActivity.class);
                 intent.putExtra(KEY_SESSION_EMAIL, email);
@@ -79,17 +79,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void saveSession(String email){
+    private void saveSession(String email) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_SESSION_EMAIL, email);
         editor.apply();
     }
 
-    private void loadSession(){
+    private void loadSession() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String  data = sharedPreferences.getString(KEY_SESSION_EMAIL, "") ;
-        if(!data.isEmpty()) {
+        String data = sharedPreferences.getString(KEY_SESSION_EMAIL, "");
+        if (!data.isEmpty()) {
             Intent intent = new Intent(this, SuccessLoginActivity.class);
             intent.putExtra(KEY_SESSION_EMAIL, data);
             startActivity(intent);
