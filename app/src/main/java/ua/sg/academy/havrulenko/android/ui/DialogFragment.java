@@ -1,7 +1,6 @@
 package ua.sg.academy.havrulenko.android.ui;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -35,11 +34,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
                 .setMessage(message)
                 .setCancelable(false)
                 .setIcon(icon)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
+                .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel());
         return builder.create();
     }
 }

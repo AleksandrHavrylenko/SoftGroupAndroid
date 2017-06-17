@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -15,7 +14,7 @@ import ua.sg.academy.havrulenko.android.HashUtils;
 import ua.sg.academy.havrulenko.android.R;
 import ua.sg.academy.havrulenko.android.dao.UsersDaoInterface;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     public static final String KEY_SESSION_EMAIL = "session_email";
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -30,21 +29,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         loadSession();
         setContentView(R.layout.activity_main);
         findViews();
-        buttonLogin.setOnClickListener(this);
-        buttonRegister.setOnClickListener(this);
+        buttonLogin.setOnClickListener(v -> onClickLogin());
+        buttonRegister.setOnClickListener(v -> onClickRegister());
         Log.d(TAG, CurrentStorage.getCurrent().getAllRecordsLog());
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.buttonLogin:
-                onClickLogin();
-                break;
-            case R.id.buttonRegister:
-                onClickRegister();
-                break;
-        }
     }
 
     private void findViews() {
