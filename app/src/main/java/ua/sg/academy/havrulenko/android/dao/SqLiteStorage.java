@@ -6,6 +6,7 @@ import java.util.List;
 
 import ua.sg.academy.havrulenko.android.HashUtils;
 import ua.sg.academy.havrulenko.android.sqlite.Account;
+import ua.sg.academy.havrulenko.android.sqlite.AccountDao;
 import ua.sg.academy.havrulenko.android.sqlite.HelperFactory;
 
 public class SqLiteStorage implements UsersDaoInterface {
@@ -64,6 +65,19 @@ public class SqLiteStorage implements UsersDaoInterface {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateUser(Account account) {
+        try {
+            HelperFactory.getHelper().getAccountsDAO().update(account);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public AccountDao getDAO() throws SQLException {
+        return HelperFactory.getHelper().getAccountsDAO();
     }
 
     public List<Account> getAll() {

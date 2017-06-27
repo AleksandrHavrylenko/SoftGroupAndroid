@@ -18,7 +18,6 @@
     <string name="password">Пароль</string>
     <string name="register">Реестрація</string>
     <string name="successful_registration">Успішна реестрація</string>
-    <string name="welcome_user_email">Ласкаво просимо %s !</string>
     <string name="not_valid_email">Пошта не пройшла валідацію</string>
     <string name="really_delete">Ви дійсно хочете видалити %s?</string>
     <string name="title_account_deleting">Видалення акаунту</string>

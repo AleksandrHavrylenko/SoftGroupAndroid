@@ -1,5 +1,6 @@
 package ua.sg.academy.havrulenko.android;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -13,6 +14,9 @@ import java.util.List;
 import ua.sg.academy.havrulenko.android.dao.SqLiteStorage;
 import ua.sg.academy.havrulenko.android.databinding.CardUserBinding;
 import ua.sg.academy.havrulenko.android.sqlite.Account;
+import ua.sg.academy.havrulenko.android.ui.AccountDetailActivity;
+
+import static ua.sg.academy.havrulenko.android.ui.MainActivity.KEY_SESSION_EMAIL;
 
 public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.UsersListViewHolder> {
 
@@ -32,7 +36,11 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
     @Override
     public void onBindViewHolder(UsersListViewHolder holder, int position) {
         Account account = accountList.get(position);
+        String firstName = account.getFirstName() == null ? "" : account.getFirstName();
+        String lastName = account.getLastName() == null ? "" : account.getLastName();
+
         holder.binding.tvUserEmail.setText(account.getEmail());
+        holder.binding.tvUserName.setText(firstName + " " + lastName);
         holder.binding.imageViewRemove.setVisibility(account.isAdmin() ? View.GONE : View.VISIBLE);
     }
 
@@ -48,6 +56,11 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
             super(itemView);
             binding = DataBindingUtil.bind(itemView);
             binding.imageViewRemove.setOnClickListener(this);
+            binding.getRoot().setOnClickListener(v -> {
+                Intent intent = new Intent(v.getContext(), AccountDetailActivity.class);
+                intent.putExtra(KEY_SESSION_EMAIL, accountList.get(getLayoutPosition()).getEmail());
+                v.getContext().startActivity(intent);
+            });
         }
 
         @Override

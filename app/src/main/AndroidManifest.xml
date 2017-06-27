@@ -28,7 +28,13 @@
         <activity
             android:name=".ui.SuccessLoginActivity"
             android:label="@string/my_account"/>
-        <activity android:name=".ui.UserListActivity" android:label="@string/tittle_users_list">
+        <activity
+            android:name=".ui.UserListActivity"
+            android:label="@string/tittle_users_list">
+        </activity>
+        <activity android:name=".ui.EditUserDataActivity" android:label="@string/title_edit_account">
+        </activity>
+        <activity android:name=".ui.AccountDetailActivity" android:label="@string/title_account_info">
         </activity>
     </application>
 

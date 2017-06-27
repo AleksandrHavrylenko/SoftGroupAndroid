@@ -26,6 +26,24 @@
         <item name="android:layout_marginTop">@dimen/layout_margin_top</item>
     </style>
 
+    <style name="MyEditText" parent="AppTheme">
+        <item name="android:ems">10</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginLeft">@dimen/layout_margin_left</item>
+        <item name="android:layout_marginRight">@dimen/layout_margin_right</item>
+    </style>
+
+    <style name="MyTextView" parent="TextAppearance.AppCompat.Small">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">@dimen/layout_margin_left</item>
+        <item name="android:layout_marginRight">@dimen/layout_margin_right</item>
+        <item name="android:layout_marginTop">@dimen/layout_margin_top</item>
+    </style>
+
     <style name="RedButton" parent="MyButton">
         <item name="android:background">@drawable/red_button</item>
     </style>

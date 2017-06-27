@@ -16,11 +16,23 @@
     <string name="password">Пароль</string>
     <string name="register">Зарегистрироваться</string>
     <string name="successful_registration">Успешная регистрация</string>
-    <string name="welcome_user_email">Добро пожаловать, %s !</string>
     <string name="err_user_exists">Пользователь с такой почтой уже зарегистрирован</string>
     <string name="confirm_password">Подтвердите пароль</string>
     <string name="not_valid_email">Почта не прошла валидацию</string>
     <string name="really_delete">Вы действительно хотите удалить %s?</string>
     <string name="title_account_deleting">Удаление аккаунта</string>
     <string name="tittle_users_list">Список аккаунтов</string>
+    <string name="first_name">Имя</string>
+    <string name="hint_first_name">Введите имя</string>
+    <string name="hint_last_name">Введите фамилию</string>
+    <string name="hint_middle_name">Введите отчество</string>
+    <string name="hint_nickname">Введите никнейм</string>
+    <string name="hint_phone_number">Введите номер телефона</string>
+    <string name="last_name">Фамилия</string>
+    <string name="middle_name">Отчество</string>
+    <string name="nickname">Никнейм</string>
+    <string name="phone_number">Номер телефона</string>
+    <string name="save">Сохранить</string>
+    <string name="title_account_info">Детали аккаунта</string>
+    <string name="title_edit_account">Изменить профиль</string>
 </resources>

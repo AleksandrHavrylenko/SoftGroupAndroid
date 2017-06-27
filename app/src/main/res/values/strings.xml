@@ -11,7 +11,6 @@
     <string name="hint_password">Enter password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="hint_confirm_password">Enter password again</string>
-    <string name="welcome_user_email">Welcome, %s !</string>
     <string name="error">Error</string>
     <string name="err_short_password">Password must be at least 4 characters</string>
     <string name="err_short_email">Email must be at least 6 characters</string>
@@ -23,4 +22,18 @@
     <string name="title_account_deleting">Account deleting</string>
     <string name="really_delete">Do you really want delete %s?</string>
     <string name="tittle_users_list">Accounts list</string>
+    <string name="hint_first_name">Enter first name</string>
+    <string name="hint_last_name">Enter last name</string>
+    <string name="hint_middle_name">Enter middle name</string>
+    <string name="hint_nickname">Enter nickname</string>
+    <string name="hint_phone_number">Enter phone number</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="middle_name">Middle name</string>
+    <string name="nickname">Nickname</string>
+    <string name="phone_number">Phone number</string>
+    <string name="save">Save</string>
+    <string name="title_account_info">Account info</string>
+    <string name="title_edit_account">Edit account</string>
+
 </resources>
