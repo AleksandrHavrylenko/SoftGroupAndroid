@@ -4,8 +4,8 @@
           package="ua.sg.academy.havrulenko.android">
 
     <application
-        android:allowBackup="true"
         android:name=".MyApplication"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
@@ -28,6 +28,8 @@
         <activity
             android:name=".ui.SuccessLoginActivity"
             android:label="@string/my_account"/>
+        <activity android:name=".ui.UserListActivity" android:label="@string/tittle_users_list">
+        </activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package ua.sg.academy.havrulenko.android.dao;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 import ua.sg.academy.havrulenko.android.HashUtils;
@@ -43,6 +44,16 @@ public class SqLiteStorage implements UsersDaoInterface {
         return null;
     }
 
+    public Account getUserByEmail(String email) {
+        try {
+            return HelperFactory.getHelper().getAccountsDAO().queryForId(email);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     @Override
     public void addUser(String email, String password) {
         Account account = new Account();
@@ -50,6 +61,23 @@ public class SqLiteStorage implements UsersDaoInterface {
         account.setPassword(HashUtils.sha512(password));
         try {
             HelperFactory.getHelper().getAccountsDAO().create(account);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Account> getAll() {
+        try {
+            return HelperFactory.getHelper().getAccountsDAO().getAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+
+    public void delete(Account account) {
+        try {
+            HelperFactory.getHelper().getAccountsDAO().delete(account);
         } catch (SQLException e) {
             e.printStackTrace();
         }
