@@ -35,5 +35,9 @@
     <string name="save">Save</string>
     <string name="title_account_info">Account info</string>
     <string name="title_edit_account">Edit account</string>
-
+    <string name="ban_info_user">Banned to: %1$s\nReason: %2$s</string>
+    <string name="ban_info_admin">Ban to: %1$s\n%2$s</string>
+    <string name="ban_reason">Ban reason</string>
+    <string name="not_banned">Not banned</string>
+    <string name="incorrect_date">Incorrect date</string>
 </resources>

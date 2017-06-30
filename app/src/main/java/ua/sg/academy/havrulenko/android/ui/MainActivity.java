@@ -9,10 +9,16 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import ua.sg.academy.havrulenko.android.CurrentStorage;
 import ua.sg.academy.havrulenko.android.HashUtils;
 import ua.sg.academy.havrulenko.android.R;
-import ua.sg.academy.havrulenko.android.dao.UsersDaoInterface;
+import ua.sg.academy.havrulenko.android.dao.SqLiteStorage;
+import ua.sg.academy.havrulenko.android.sqlite.Account;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,14 +54,23 @@ public class MainActivity extends AppCompatActivity {
         String hash = HashUtils.sha512(password);
         Log.d(TAG, "onClickLogin: hash:" + hash);
 
-        UsersDaoInterface dao = CurrentStorage.getCurrent();
+        SqLiteStorage dao = SqLiteStorage.getInstance();
         if (dao.contains(email)) {
             String pass = dao.getPasswordByEmail(email);
             if (pass.equals(hash)) {
-                saveSession(email);
-                Intent intent = new Intent(MainActivity.this, SuccessLoginActivity.class);
-                intent.putExtra(KEY_SESSION_EMAIL, email);
-                startActivity(intent);
+                Account account = dao.getUserByEmail(email);
+                long longBannedTo = account.getBannedTo();
+                if (longBannedTo != 0 && longBannedTo > System.currentTimeMillis()) {
+                    DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+                    Date date = new Date(longBannedTo);
+                    String msg = getString(R.string.ban_info_user, dateFormat.format(date), account.getBanReason());
+                    DialogFragment.newInstance(msg).show(getSupportFragmentManager(), msg);
+                } else {
+                    saveSession(email);
+                    Intent intent = new Intent(MainActivity.this, SuccessLoginActivity.class);
+                    intent.putExtra(KEY_SESSION_EMAIL, email);
+                    startActivity(intent);
+                }
             } else {
                 String msg = getResources().getString(R.string.invalid_password);
                 DialogFragment.newInstance(msg).show(getSupportFragmentManager(), msg);

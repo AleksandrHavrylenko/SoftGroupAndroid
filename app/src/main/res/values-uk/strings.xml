@@ -22,4 +22,22 @@
     <string name="really_delete">Ви дійсно хочете видалити %s?</string>
     <string name="title_account_deleting">Видалення акаунту</string>
     <string name="tittle_users_list">Список акаунтів</string>
+    <string name="first_name">Ім\'я</string>
+    <string name="hint_first_name">Введіть ім\'я</string>
+    <string name="hint_last_name">Введіть прізвище</string>
+    <string name="hint_middle_name">Введіть по-батькові</string>
+    <string name="hint_nickname">Введіть нікнейм</string>
+    <string name="hint_phone_number">Введіть номер телефону</string>
+    <string name="incorrect_date">Дата вже пройшла</string>
+    <string name="last_name">Прізвище</string>
+    <string name="middle_name">По-батькові</string>
+    <string name="nickname">Нікнейм</string>
+    <string name="not_banned">Не забанений</string>
+    <string name="phone_number">Номер телефону</string>
+    <string name="save">Зберегти</string>
+    <string name="title_account_info">Деталі акаунту</string>
+    <string name="title_edit_account">Змінити профіль</string>
+    <string name="ban_reason">Причина бану</string>
+    <string name="ban_info_admin">Бан до: %1$s\n%2$s</string>
+    <string name="ban_info_user">Забанен до: %1$s\nПричина: %2$s</string>
 </resources>

@@ -35,4 +35,9 @@
     <string name="save">Сохранить</string>
     <string name="title_account_info">Детали аккаунта</string>
     <string name="title_edit_account">Изменить профиль</string>
+    <string name="not_banned">Не забанен</string>
+    <string name="incorrect_date">Дата уже прошла</string>
+    <string name="ban_reason">Причина бана</string>
+    <string name="ban_info_admin">Бан до: %1$s\n%2$s</string>
+    <string name="ban_info_user">Забанен до: %1$s\nПричина: %2$s</string>
 </resources>

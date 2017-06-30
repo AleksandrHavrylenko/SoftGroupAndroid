@@ -32,11 +32,11 @@
                 android:layout_marginLeft="@dimen/card_margin"
                 android:layout_marginRight="@dimen/card_margin"
                 android:layout_marginTop="@dimen/card_margin"
-                android:text="test_user@mail.com"
                 android:textSize="18sp"
                 app:layout_constraintLeft_toRightOf="@+id/image_view_user_picture"
                 app:layout_constraintRight_toLeftOf="@+id/image_view_remove"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="test_user@mail.com"/>
 
             <ImageView
                 android:id="@+id/image_view_user_picture"
@@ -55,11 +55,11 @@
                 android:id="@+id/tvUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:text="TextView"
+                android:layout_marginLeft="@dimen/card_margin"
+                android:layout_marginTop="@dimen/card_margin"
                 app:layout_constraintLeft_toRightOf="@+id/image_view_user_picture"
-                app:layout_constraintTop_toBottomOf="@+id/tvUserEmail"/>
+                app:layout_constraintTop_toBottomOf="@+id/tvUserEmail"
+                tools:text="TextView"/>
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>

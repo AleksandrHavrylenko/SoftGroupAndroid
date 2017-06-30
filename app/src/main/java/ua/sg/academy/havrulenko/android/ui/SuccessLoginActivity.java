@@ -33,7 +33,7 @@ public class SuccessLoginActivity extends AppCompatActivity {
         buttonUserList.setOnClickListener(v -> onClickButtonUserList());
         buttonEditData.setOnClickListener(v -> onClickEditData(email));
 
-        AccountDetailsFragment fragment = AccountDetailsFragment.newInstance(email);
+        AccountDetailsFragment fragment = AccountDetailsFragment.newInstance(email, false);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();

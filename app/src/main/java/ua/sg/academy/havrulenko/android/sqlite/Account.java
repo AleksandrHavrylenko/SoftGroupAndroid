@@ -15,6 +15,8 @@ public class Account {
     public static final String FIELD_NAME_MIDDLE_NAME = "middleName";
     public static final String FIELD_NAME_NICKNAME = "nickname";
     public static final String FIELD_NAME_PHONE = "phone";
+    public static final String FIELD_NAME_BANNED_TO = "bannedTo";
+    public static final String FIELD_NAME_BAN_REASON = "banReason";
 
     @DatabaseField(id = true, columnName = FIELD_NAME_EMAIL)
     private String email;
@@ -32,8 +34,28 @@ public class Account {
     private String nickname;
     @DatabaseField(columnName = FIELD_NAME_PHONE)
     private String phone;
+    @DatabaseField(columnName = FIELD_NAME_BANNED_TO)
+    private long bannedTo;
+    @DatabaseField(columnName = FIELD_NAME_BAN_REASON)
+    private String banReason;
 
     public Account() {
+    }
+
+    public String getBanReason() {
+        return banReason;
+    }
+
+    public void setBanReason(String banReason) {
+        this.banReason = banReason;
+    }
+
+    public long getBannedTo() {
+        return bannedTo;
+    }
+
+    public void setBannedTo(long bannedTo) {
+        this.bannedTo = bannedTo;
     }
 
     public String getEmail() {
