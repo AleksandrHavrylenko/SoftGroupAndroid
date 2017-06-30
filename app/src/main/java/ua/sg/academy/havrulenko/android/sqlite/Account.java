@@ -17,6 +17,7 @@ public class Account {
     public static final String FIELD_NAME_PHONE = "phone";
     public static final String FIELD_NAME_BANNED_TO = "bannedTo";
     public static final String FIELD_NAME_BAN_REASON = "banReason";
+    public static final String FIELD_NAME_IMAGE = "image";
 
     @DatabaseField(id = true, columnName = FIELD_NAME_EMAIL)
     private String email;
@@ -38,8 +39,18 @@ public class Account {
     private long bannedTo;
     @DatabaseField(columnName = FIELD_NAME_BAN_REASON)
     private String banReason;
+    @DatabaseField(columnName = FIELD_NAME_IMAGE)
+    private String image;
 
     public Account() {
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getBanReason() {

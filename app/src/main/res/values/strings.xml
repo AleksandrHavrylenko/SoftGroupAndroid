@@ -40,4 +40,5 @@
     <string name="ban_reason">Ban reason</string>
     <string name="not_banned">Not banned</string>
     <string name="incorrect_date">Incorrect date</string>
+    <string name="user_photo">User photo</string>
 </resources>

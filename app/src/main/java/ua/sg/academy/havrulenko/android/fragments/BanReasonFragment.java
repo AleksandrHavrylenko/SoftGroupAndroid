@@ -38,7 +38,6 @@ public class BanReasonFragment extends android.support.v4.app.DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final String title = getString(R.string.ban_reason);
-        final Drawable icon = ContextCompat.getDrawable(getActivity(), R.drawable.ic_mail_outline);
         final String oldReason = getArguments().getString(ARG_REASON, "");
         final EditText input = new EditText(getContext());
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
@@ -50,7 +49,6 @@ public class BanReasonFragment extends android.support.v4.app.DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(title)
                 .setCancelable(false)
-                .setIcon(icon)
                 .setView(input)
                 .setNegativeButton(android.R.string.cancel, (dialog, id) -> dialog.cancel())
                 .setPositiveButton(android.R.string.ok, (dialog, id) -> {

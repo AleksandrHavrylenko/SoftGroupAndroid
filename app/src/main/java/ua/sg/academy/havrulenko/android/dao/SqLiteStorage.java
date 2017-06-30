@@ -51,9 +51,10 @@ public class SqLiteStorage {
         return null;
     }
 
-    public void addUser(String email, String password) {
+    public void addUser(String email, String password, String image) {
         Account account = new Account();
         account.setEmail(email);
+        account.setImage(image);
         account.setPassword(HashUtils.sha512(password));
         try {
             HelperFactory.getHelper().getAccountsDAO().create(account);

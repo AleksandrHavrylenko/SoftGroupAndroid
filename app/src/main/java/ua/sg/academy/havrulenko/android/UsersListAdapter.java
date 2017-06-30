@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
 import java.util.List;
 
 import ua.sg.academy.havrulenko.android.dao.SqLiteStorage;
@@ -42,6 +45,14 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
         holder.binding.tvUserEmail.setText(account.getEmail());
         holder.binding.tvUserName.setText(firstName + " " + lastName);
         holder.binding.imageViewRemove.setVisibility(account.isAdmin() ? View.GONE : View.VISIBLE);
+
+        if(account.getImage() != null) {
+            Picasso.with(holder.binding.getRoot().getContext())
+                    .load(new File(account.getImage()))
+                    .into(holder.binding.imageViewUserPicture);
+        } else {
+            holder.binding.imageViewUserPicture.setImageResource(R.drawable.ic_account_circle);
+        }
     }
 
     @Override

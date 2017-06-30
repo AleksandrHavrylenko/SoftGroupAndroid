@@ -3,21 +3,33 @@ package ua.sg.academy.havrulenko.android.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
+import com.vansuita.pickimage.bundle.PickSetup;
+import com.vansuita.pickimage.dialog.PickImageDialog;
+
+import java.io.File;
 
 import ua.sg.academy.havrulenko.android.R;
 import ua.sg.academy.havrulenko.android.dao.SqLiteStorage;
 import ua.sg.academy.havrulenko.android.fragments.DialogFragment;
 
 public class RegisterActivity extends AppCompatActivity {
+    private static final String KEY_IMAGE_PATH = "image_path";
 
     private EditText editTextEmail;
     private EditText editTextPass;
     private EditText editTextConfirmPass;
     private Button buttonRegister;
+    private ImageView imageViewUser;
+
+    private String imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +39,24 @@ public class RegisterActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        if (savedInstanceState != null){
+            imagePath = savedInstanceState.getString(KEY_IMAGE_PATH);
+            if(imagePath!=null) {
+                File file = new File(imagePath);
+                Picasso.with(this).load(file).into(imageViewUser);
+            }
+        }
+
         buttonRegister.setOnClickListener(v -> onClickRegister());
+        imageViewUser.setOnClickListener(v -> {
+            PickImageDialog.build(new PickSetup().setWidth(512).setHeight(512))
+                    .setOnPickResult(r -> {
+                        imageViewUser.setImageBitmap(r.getBitmap());
+                        Log.d("IMAGE", "path: " + r.getPath());
+                        Log.d("URI", "uri: " + r.getUri());
+                        imagePath = r.getPath();
+                    }).show(getSupportFragmentManager());
+        });
     }
 
     private void findViews() {
@@ -35,6 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
         editTextPass = (EditText) findViewById(R.id.editTextPassword);
         editTextConfirmPass = (EditText) findViewById(R.id.editTextConfirmPassword);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        imageViewUser = (ImageView) findViewById(R.id.imageViewUser);
     }
 
     private void onClickRegister() {
@@ -70,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        dao.addUser(email, pass1);
+        dao.addUser(email, pass1, imagePath);
 
         Toast.makeText(this, R.string.successful_registration, Toast.LENGTH_SHORT).show();
 
@@ -84,6 +114,12 @@ public class RegisterActivity extends AppCompatActivity {
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(pattern);
         java.util.regex.Matcher m = p.matcher(email);
         return m.matches();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString(KEY_IMAGE_PATH, imagePath);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
