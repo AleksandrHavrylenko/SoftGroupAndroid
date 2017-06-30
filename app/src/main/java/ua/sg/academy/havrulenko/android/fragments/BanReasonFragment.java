@@ -1,4 +1,4 @@
-package ua.sg.academy.havrulenko.android.ui;
+package ua.sg.academy.havrulenko.android.fragments;
 
 import android.app.Dialog;
 import android.graphics.drawable.Drawable;

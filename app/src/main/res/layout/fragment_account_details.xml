@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="ua.sg.academy.havrulenko.android.ui.AccountDetailsFragment"
+        tools:context="ua.sg.academy.havrulenko.android.fragments.AccountDetailsFragment"
         tools:ignore="ContentDescription, RtlHardcoded">
 
         <android.support.v7.widget.CardView

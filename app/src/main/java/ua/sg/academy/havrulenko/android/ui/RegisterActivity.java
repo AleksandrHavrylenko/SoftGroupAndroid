@@ -8,9 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import ua.sg.academy.havrulenko.android.CurrentStorage;
 import ua.sg.academy.havrulenko.android.R;
-import ua.sg.academy.havrulenko.android.dao.UsersDaoInterface;
+import ua.sg.academy.havrulenko.android.dao.SqLiteStorage;
+import ua.sg.academy.havrulenko.android.fragments.DialogFragment;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -42,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         String pass1 = editTextPass.getText().toString();
         String pass2 = editTextConfirmPass.getText().toString();
 
-        UsersDaoInterface dao = CurrentStorage.getCurrent();
+        SqLiteStorage dao = SqLiteStorage.getInstance();
 
         if (email.length() < 6) {
             String msg = getResources().getString(R.string.err_short_email);

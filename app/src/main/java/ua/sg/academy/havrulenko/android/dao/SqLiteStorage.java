@@ -9,7 +9,7 @@ import ua.sg.academy.havrulenko.android.sqlite.Account;
 import ua.sg.academy.havrulenko.android.sqlite.AccountDao;
 import ua.sg.academy.havrulenko.android.sqlite.HelperFactory;
 
-public class SqLiteStorage implements UsersDaoInterface {
+public class SqLiteStorage {
 
     private static SqLiteStorage instance;
 
@@ -23,8 +23,6 @@ public class SqLiteStorage implements UsersDaoInterface {
         return instance;
     }
 
-
-    @Override
     public boolean contains(String email) {
         try {
             return HelperFactory.getHelper().getAccountsDAO().idExists(email);
@@ -34,7 +32,6 @@ public class SqLiteStorage implements UsersDaoInterface {
         return false;
     }
 
-    @Override
     public String getPasswordByEmail(String email) {
         try {
             Account account = HelperFactory.getHelper().getAccountsDAO().queryForId(email);
@@ -54,8 +51,6 @@ public class SqLiteStorage implements UsersDaoInterface {
         return null;
     }
 
-
-    @Override
     public void addUser(String email, String password) {
         Account account = new Account();
         account.setEmail(email);
@@ -97,7 +92,6 @@ public class SqLiteStorage implements UsersDaoInterface {
         }
     }
 
-    @Override
     public String getAllRecordsLog() {
         try {
             List<Account> accounts = HelperFactory.getHelper().getAccountsDAO().getAll();

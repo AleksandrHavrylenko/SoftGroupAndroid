@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import ua.sg.academy.havrulenko.android.R;
 import ua.sg.academy.havrulenko.android.dao.SqLiteStorage;
+import ua.sg.academy.havrulenko.android.fragments.AccountDetailsFragment;
 import ua.sg.academy.havrulenko.android.sqlite.Account;
 
 import static android.view.View.GONE;

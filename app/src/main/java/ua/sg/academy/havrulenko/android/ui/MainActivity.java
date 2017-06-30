@@ -14,10 +14,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import ua.sg.academy.havrulenko.android.CurrentStorage;
 import ua.sg.academy.havrulenko.android.HashUtils;
 import ua.sg.academy.havrulenko.android.R;
 import ua.sg.academy.havrulenko.android.dao.SqLiteStorage;
+import ua.sg.academy.havrulenko.android.fragments.DialogFragment;
 import ua.sg.academy.havrulenko.android.sqlite.Account;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         findViews();
         buttonLogin.setOnClickListener(v -> onClickLogin());
         buttonRegister.setOnClickListener(v -> onClickRegister());
-        Log.d(TAG, CurrentStorage.getCurrent().getAllRecordsLog());
+        Log.d(TAG, SqLiteStorage.getInstance().getAllRecordsLog());
     }
 
     private void findViews() {

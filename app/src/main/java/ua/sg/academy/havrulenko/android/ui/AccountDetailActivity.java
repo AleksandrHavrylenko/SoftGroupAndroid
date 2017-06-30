@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import ua.sg.academy.havrulenko.android.R;
+import ua.sg.academy.havrulenko.android.fragments.AccountDetailsFragment;
 
 import static ua.sg.academy.havrulenko.android.ui.MainActivity.KEY_SESSION_EMAIL;
 
