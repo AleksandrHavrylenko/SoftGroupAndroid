@@ -10,10 +10,11 @@ import android.widget.Button;
 import ua.sg.academy.havrulenko.android.R;
 import ua.sg.academy.havrulenko.android.dao.SqLiteStorage;
 import ua.sg.academy.havrulenko.android.fragments.AccountDetailsFragment;
-import ua.sg.academy.havrulenko.android.sqlite.Account;
+import ua.sg.academy.havrulenko.android.model.Account;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static ua.sg.academy.havrulenko.android.ui.AddPlaceActivity.KEY_EMAIL;
 import static ua.sg.academy.havrulenko.android.ui.MainActivity.KEY_SESSION_EMAIL;
 
 public class SuccessLoginActivity extends AppCompatActivity {
@@ -25,6 +26,8 @@ public class SuccessLoginActivity extends AppCompatActivity {
         Button buttonLogout = (Button) findViewById(R.id.buttonLogout);
         Button buttonUserList = (Button) findViewById(R.id.buttonUserList);
         Button buttonEditData = (Button) findViewById(R.id.buttonEditData);
+        Button buttonAddPlace = (Button) findViewById(R.id.buttonAddPlace);
+        Button buttonMyPlaces = (Button) findViewById(R.id.buttonMyPlaces);
 
         String email = getIntent().getStringExtra(KEY_SESSION_EMAIL);
         Account account = SqLiteStorage.getInstance().getUserByEmail(email);
@@ -33,6 +36,8 @@ public class SuccessLoginActivity extends AppCompatActivity {
         buttonUserList.setClickable(account.isAdmin());
         buttonUserList.setOnClickListener(v -> onClickButtonUserList());
         buttonEditData.setOnClickListener(v -> onClickEditData(email));
+        buttonAddPlace.setOnClickListener(v -> onClickAddPlace(email));
+        buttonMyPlaces.setOnClickListener(v -> onClickMyPlaces(email));
 
         AccountDetailsFragment fragment = AccountDetailsFragment.newInstance(email, false);
         getSupportFragmentManager().beginTransaction()
@@ -55,6 +60,18 @@ public class SuccessLoginActivity extends AppCompatActivity {
     private void onClickEditData(String email) {
         Intent intent = new Intent(this, EditUserDataActivity.class);
         intent.putExtra(KEY_SESSION_EMAIL, email);
+        startActivity(intent);
+    }
+
+    private void onClickAddPlace(String email) {
+        Intent intent = new Intent(this, AddPlaceActivity.class);
+        intent.putExtra(KEY_EMAIL, email);
+        startActivity(intent);
+    }
+
+    private void onClickMyPlaces(String email) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra(KEY_EMAIL, email);
         startActivity(intent);
     }
 

@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import ua.sg.academy.havrulenko.android.R;
 import ua.sg.academy.havrulenko.android.dao.SqLiteStorage;
 import ua.sg.academy.havrulenko.android.databinding.ActivityEditUserDataBinding;
-import ua.sg.academy.havrulenko.android.sqlite.Account;
+import ua.sg.academy.havrulenko.android.model.Account;
 
 import static ua.sg.academy.havrulenko.android.ui.MainActivity.KEY_SESSION_EMAIL;
 

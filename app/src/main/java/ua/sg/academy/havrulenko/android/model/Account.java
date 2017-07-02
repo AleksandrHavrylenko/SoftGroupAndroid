@@ -1,7 +1,10 @@
-package ua.sg.academy.havrulenko.android.sqlite;
+package ua.sg.academy.havrulenko.android.model;
 
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
+
+import java.util.Collection;
 
 @SuppressWarnings("all")
 @DatabaseTable(tableName = Account.TABLE_NAME_ACCOUNTS)
@@ -41,6 +44,8 @@ public class Account {
     private String banReason;
     @DatabaseField(columnName = FIELD_NAME_IMAGE)
     private String image;
+    @ForeignCollectionField(eager = false)
+    private Collection<Place> places;
 
     public Account() {
     }
@@ -133,4 +138,11 @@ public class Account {
         this.phone = phone;
     }
 
+    public Collection<Place> getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(Collection<Place> places) {
+        this.places = places;
+    }
 }

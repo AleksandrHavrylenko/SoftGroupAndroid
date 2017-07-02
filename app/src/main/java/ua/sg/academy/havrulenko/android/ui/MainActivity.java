@@ -18,16 +18,18 @@ import ua.sg.academy.havrulenko.android.HashUtils;
 import ua.sg.academy.havrulenko.android.R;
 import ua.sg.academy.havrulenko.android.dao.SqLiteStorage;
 import ua.sg.academy.havrulenko.android.fragments.DialogFragment;
-import ua.sg.academy.havrulenko.android.sqlite.Account;
+import ua.sg.academy.havrulenko.android.model.Account;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String KEY_SESSION_EMAIL = "session_email";
+    public static final int REQUEST_CODE_SELECT_POINT = 0;
     private static final String TAG = MainActivity.class.getSimpleName();
     private EditText editTextEmail;
     private EditText editTextPassword;
     private Button buttonLogin;
     private Button buttonRegister;
+    private Button buttonMaps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,13 @@ public class MainActivity extends AppCompatActivity {
         findViews();
         buttonLogin.setOnClickListener(v -> onClickLogin());
         buttonRegister.setOnClickListener(v -> onClickRegister());
+        buttonMaps.setOnClickListener(v -> buttonMaps());
         Log.d(TAG, SqLiteStorage.getInstance().getAllRecordsLog());
+    }
+
+    private void buttonMaps() {
+        Intent intent = new Intent(this, SelectPointOnMapActivity.class);
+        startActivityForResult(intent, REQUEST_CODE_SELECT_POINT);
     }
 
     private void findViews() {
@@ -45,6 +53,22 @@ public class MainActivity extends AppCompatActivity {
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        buttonMaps = (Button) findViewById(R.id.buttonMaps);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE_SELECT_POINT) {
+            if(resultCode == RESULT_OK) {
+                double x = data.getDoubleExtra(SelectPointOnMapActivity.KEY_LATITUDE, Double.NaN);
+                double y = data.getDoubleExtra(SelectPointOnMapActivity.KEY_LONGITUDE, Double.NaN);
+                Log.d(TAG, "onActivityResult: x: " + x + " y:" +y);
+            } else {
+                Log.d(TAG, "onActivityResult: " + resultCode);
+            }
+
+        }
     }
 
     private void onClickLogin() {

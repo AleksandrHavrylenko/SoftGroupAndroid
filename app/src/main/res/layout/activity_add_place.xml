@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="ua.sg.academy.havrulenko.android.ui.AddPlaceActivity"
+        tools:ignore="RtlHardcoded">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/MyTextView"
+                android:text="@string/place_title"/>
+
+            <EditText
+                android:id="@+id/editTextTitle"
+                style="@style/MyEditText"
+                android:inputType="textPersonName"/>
+
+            <TextView
+                style="@style/MyTextView"
+                android:text="@string/place_description"/>
+
+            <EditText
+                android:id="@+id/editTextDescription"
+                style="@style/MyEditText"
+                android:inputType="textPersonName"/>
+
+            <TextView
+                style="@style/MyTextView"
+                android:text="@string/place_select_image"/>
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_account_circle"/>
+
+            <TextView
+                style="@style/MyTextView"
+                android:text="@string/place_select_map"/>
+            <Button
+                android:id="@+id/buttonOpenMap"
+                style="@style/RedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/select_place" />
+
+            <Button
+                android:id="@+id/buttonSave"
+                style="@style/RedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/save" />
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

@@ -16,7 +16,7 @@ import java.util.List;
 
 import ua.sg.academy.havrulenko.android.dao.SqLiteStorage;
 import ua.sg.academy.havrulenko.android.databinding.CardUserBinding;
-import ua.sg.academy.havrulenko.android.sqlite.Account;
+import ua.sg.academy.havrulenko.android.model.Account;
 import ua.sg.academy.havrulenko.android.ui.AccountDetailActivity;
 
 import static ua.sg.academy.havrulenko.android.ui.MainActivity.KEY_SESSION_EMAIL;

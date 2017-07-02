@@ -3,8 +3,6 @@ package ua.sg.academy.havrulenko.android.fragments;
 
 import android.app.DatePickerDialog;
 import android.databinding.DataBindingUtil;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,10 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
-import com.vansuita.pickimage.bean.PickResult;
 import com.vansuita.pickimage.bundle.PickSetup;
 import com.vansuita.pickimage.dialog.PickImageDialog;
-import com.vansuita.pickimage.listeners.IPickResult;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -27,7 +23,7 @@ import java.util.Locale;
 import ua.sg.academy.havrulenko.android.R;
 import ua.sg.academy.havrulenko.android.dao.SqLiteStorage;
 import ua.sg.academy.havrulenko.android.databinding.FragmentAccountDetailsBinding;
-import ua.sg.academy.havrulenko.android.sqlite.Account;
+import ua.sg.academy.havrulenko.android.model.Account;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -67,6 +63,7 @@ public class AccountDetailsFragment extends Fragment implements BanReasonFragmen
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_account_details, container, false);
         return binding.getRoot();
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -78,19 +75,19 @@ public class AccountDetailsFragment extends Fragment implements BanReasonFragmen
         binding.textViewNickname.setText(prepareText(account.getNickname()));
         binding.textViewPhone.setText(prepareText(account.getPhone()));
 
-        if(account.getImage() != null) {
+        if (account.getImage() != null) {
             Picasso.with(getContext()).load(new File(account.getImage())).into(binding.imageView);
         }
 
         binding.imageView.setOnClickListener(v ->
                 PickImageDialog.build(new PickSetup().setWidth(512).setHeight(512))
-                .setOnPickResult(r -> {
-                    binding.imageView.setImageBitmap(r.getBitmap());
-                    Log.d("IMAGE", "path: " + r.getPath());
-                    Log.d("URI", "uri: " + r.getUri());
-                    account.setImage(r.getPath());
-                    SqLiteStorage.getInstance().updateUser(account);
-                }).show(getActivity().getSupportFragmentManager()));
+                        .setOnPickResult(r -> {
+                            binding.imageView.setImageBitmap(r.getBitmap());
+                            Log.d("IMAGE", "path: " + r.getPath());
+                            Log.d("URI", "uri: " + r.getUri());
+                            account.setImage(r.getPath());
+                            SqLiteStorage.getInstance().updateUser(account);
+                        }).show(getActivity().getSupportFragmentManager()));
 
         if (adminMode && !account.isAdmin()) {
             binding.cardViewBan.setVisibility(VISIBLE);

@@ -1,13 +1,16 @@
 package ua.sg.academy.havrulenko.android.dao;
 
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import ua.sg.academy.havrulenko.android.HashUtils;
-import ua.sg.academy.havrulenko.android.sqlite.Account;
+import ua.sg.academy.havrulenko.android.model.Account;
+import ua.sg.academy.havrulenko.android.model.Place;
 import ua.sg.academy.havrulenko.android.sqlite.AccountDao;
 import ua.sg.academy.havrulenko.android.sqlite.HelperFactory;
+import ua.sg.academy.havrulenko.android.sqlite.PlaceDao;
 
 public class SqLiteStorage {
 
@@ -76,6 +79,28 @@ public class SqLiteStorage {
         return HelperFactory.getHelper().getAccountsDAO();
     }
 
+    public PlaceDao getPlaceDAO() throws SQLException {
+        return HelperFactory.getHelper().getPlaceDAO();
+    }
+
+    public void addPlaceForUser(Account account, Place place) {
+        place.setAccount(account);
+        account.getPlaces().add(place);
+    }
+
+    public Place getPlaceById(int id) {
+        try {
+            return HelperFactory.getHelper().getPlaceDAO().queryForId(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Collection<Place> getAllPlacesByUser(String email) {
+        return getUserByEmail(email).getPlaces();
+    }
+
     public List<Account> getAll() {
         try {
             return HelperFactory.getHelper().getAccountsDAO().getAll();
@@ -101,7 +126,7 @@ public class SqLiteStorage {
             sb.append("Type: SQLite\n");
             sb.append("Records count: ").append(accounts.size()).append("\n");
             sb.append("Accounts info:\nEmail\t\tPassword\n");
-            for (Account a: accounts) {
+            for (Account a : accounts) {
                 sb.append(a.getEmail())
                         .append(" \t- ")
                         .append(a.getPassword())
@@ -111,7 +136,7 @@ public class SqLiteStorage {
             return sb.toString();
         } catch (SQLException e) {
             e.printStackTrace();
-            return "Error: " +e.getMessage();
+            return "Error: " + e.getMessage();
         }
     }
 }

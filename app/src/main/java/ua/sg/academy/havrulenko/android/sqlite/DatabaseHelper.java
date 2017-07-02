@@ -11,17 +11,21 @@ import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
 
-import static ua.sg.academy.havrulenko.android.sqlite.Account.FIELD_NAME_EMAIL;
-import static ua.sg.academy.havrulenko.android.sqlite.Account.FIELD_NAME_IS_ADMIN;
-import static ua.sg.academy.havrulenko.android.sqlite.Account.FIELD_NAME_PASSWORD;
-import static ua.sg.academy.havrulenko.android.sqlite.Account.TABLE_NAME_ACCOUNTS;
+import ua.sg.academy.havrulenko.android.model.Account;
+import ua.sg.academy.havrulenko.android.model.Place;
+
+import static ua.sg.academy.havrulenko.android.model.Account.FIELD_NAME_EMAIL;
+import static ua.sg.academy.havrulenko.android.model.Account.FIELD_NAME_IS_ADMIN;
+import static ua.sg.academy.havrulenko.android.model.Account.FIELD_NAME_PASSWORD;
+import static ua.sg.academy.havrulenko.android.model.Account.TABLE_NAME_ACCOUNTS;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String TAG = DatabaseHelper.class.getSimpleName();
     private static final String DATABASE_NAME = "my.db";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
     private AccountDao accountDao = null;
+    private PlaceDao placeDao = null;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -31,6 +35,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase db, ConnectionSource connectionSource) {
         try {
             TableUtils.createTable(connectionSource, Account.class);
+            TableUtils.createTable(connectionSource, Place.class);
         } catch (SQLException e) {
             Log.e(TAG, "error creating DB " + DATABASE_NAME);
             throw new RuntimeException(e);
@@ -75,6 +80,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             accountDao = new AccountDao(getConnectionSource(), Account.class);
         }
         return accountDao;
+    }
+
+    public PlaceDao getPlaceDAO() throws SQLException {
+        if (placeDao == null) {
+            placeDao = new PlaceDao(getConnectionSource(), Place.class);
+        }
+        return placeDao;
     }
 
     @Override

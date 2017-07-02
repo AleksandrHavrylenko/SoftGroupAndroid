@@ -6,13 +6,14 @@ import com.j256.ormlite.support.ConnectionSource;
 import java.sql.SQLException;
 import java.util.List;
 
-import ua.sg.academy.havrulenko.android.model.Account;
+import ua.sg.academy.havrulenko.android.model.Place;
 
-public class AccountDao extends BaseDaoImpl<Account, String> {
-    AccountDao(ConnectionSource connectionSource, Class<Account> dataClass) throws SQLException {
+public class PlaceDao extends BaseDaoImpl<Place, Integer> {
+    PlaceDao(ConnectionSource connectionSource, Class<Place> dataClass) throws SQLException {
         super(connectionSource, dataClass);
     }
-    public List<Account> getAll() throws SQLException {
+
+    public List<Place> getAll() throws SQLException {
         return this.queryForAll();
     }
 }
