@@ -8,6 +8,7 @@ import java.util.List;
 
 import ua.sg.academy.havrulenko.android.model.Place;
 
+@SuppressWarnings("unused")
 public class PlaceDao extends BaseDaoImpl<Place, Integer> {
     PlaceDao(ConnectionSource connectionSource, Class<Place> dataClass) throws SQLException {
         super(connectionSource, dataClass);

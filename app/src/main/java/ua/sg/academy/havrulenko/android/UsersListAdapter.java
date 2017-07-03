@@ -2,14 +2,15 @@ package ua.sg.academy.havrulenko.android;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.List;
@@ -42,16 +43,20 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
         String firstName = account.getFirstName() == null ? "" : account.getFirstName();
         String lastName = account.getLastName() == null ? "" : account.getLastName();
 
-        holder.binding.tvUserEmail.setText(account.getEmail());
-        holder.binding.tvUserName.setText(firstName + " " + lastName);
-        holder.binding.imageViewRemove.setVisibility(account.isAdmin() ? View.GONE : View.VISIBLE);
+        holder.mBinding.tvUserEmail.setText(account.getEmail());
+        holder.mBinding.tvUserName.setText(firstName + " " + lastName);
+        holder.mBinding.imageViewRemove.setVisibility(account.isAdmin() ? View.GONE : View.VISIBLE);
 
-        if(account.getImage() != null) {
-            Picasso.with(holder.binding.getRoot().getContext())
-                    .load(new File(account.getImage()))
-                    .into(holder.binding.imageViewUserPicture);
+        if (account.getImage() != null) {
+            Log.d("IMAGE", "onBindViewHolder: " + account.getImage());
+            File imgFile=new File(MyApplication.getImgPathUsers(), account.getImage());
+           // File imgFile = new File(String.valueOf(account.getImage()));
+            if (imgFile.exists()) {
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                holder.mBinding.imageViewUserPicture.setImageBitmap(myBitmap);
+            }
         } else {
-            holder.binding.imageViewUserPicture.setImageResource(R.drawable.ic_account_circle);
+            holder.mBinding.imageViewUserPicture.setImageResource(R.drawable.ic_account_circle);
         }
     }
 
@@ -61,13 +66,13 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
     }
 
     class UsersListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        final CardUserBinding binding;
+        final CardUserBinding mBinding;
 
         UsersListViewHolder(View itemView) {
             super(itemView);
-            binding = DataBindingUtil.bind(itemView);
-            binding.imageViewRemove.setOnClickListener(this);
-            binding.getRoot().setOnClickListener(v -> {
+            mBinding = DataBindingUtil.bind(itemView);
+            mBinding.imageViewRemove.setOnClickListener(this);
+            mBinding.getRoot().setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), AccountDetailActivity.class);
                 intent.putExtra(KEY_SESSION_EMAIL, accountList.get(getLayoutPosition()).getEmail());
                 v.getContext().startActivity(intent);
@@ -78,7 +83,7 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
         public void onClick(View v) {
             final int pos = getLayoutPosition();
             Account account = accountList.get(pos);
-            new AlertDialog.Builder(binding.getRoot().getContext())
+            new AlertDialog.Builder(mBinding.getRoot().getContext())
                     .setTitle(R.string.title_account_deleting)
                     .setMessage(v.getContext().getString(R.string.really_delete, account.getEmail()))
                     .setNegativeButton(android.R.string.no, null)

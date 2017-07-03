@@ -3,8 +3,6 @@ package ua.sg.academy.havrulenko.android.ui;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,27 +12,18 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.File;
 import java.text.DecimalFormat;
-import java.util.List;
 
 import ua.sg.academy.havrulenko.android.R;
-import ua.sg.academy.havrulenko.android.dao.SqLiteStorage;
-import ua.sg.academy.havrulenko.android.model.Account;
 
 import static ua.sg.academy.havrulenko.android.R.id.map;
 
@@ -42,9 +31,9 @@ public class SelectPointOnMapActivity extends AppCompatActivity implements OnMap
 
     public static final String KEY_LATITUDE = "latitude";
     public static final String KEY_LONGITUDE = "longitude";
-    public static final int CODE_CHECK_PERMISSIONS = 101;
-    public static final LatLng DEFAULT_COORDINATES = new LatLng(51.494481515522786, 31.295225881040093);
-    public static final float DEFAULT_ZOOM = 12;
+    private static final int CODE_CHECK_PERMISSIONS = 101;
+    private static final LatLng DEFAULT_COORDINATES = new LatLng(51.494481515522786, 31.295225881040093);
+    private static final float DEFAULT_ZOOM = 12;
     private static final String TAG = SelectPointOnMapActivity.class.getSimpleName();
     private GoogleMap mMap;
     private double latitude = Double.NaN;

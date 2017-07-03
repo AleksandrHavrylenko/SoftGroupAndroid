@@ -3,15 +3,16 @@ package ua.sg.academy.havrulenko.android.fragments;
 
 import android.app.DatePickerDialog;
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
 import com.vansuita.pickimage.bundle.PickSetup;
 import com.vansuita.pickimage.dialog.PickImageDialog;
 
@@ -20,7 +21,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import ua.sg.academy.havrulenko.android.MyApplication;
 import ua.sg.academy.havrulenko.android.R;
+import ua.sg.academy.havrulenko.android.Utils;
 import ua.sg.academy.havrulenko.android.dao.SqLiteStorage;
 import ua.sg.academy.havrulenko.android.databinding.FragmentAccountDetailsBinding;
 import ua.sg.academy.havrulenko.android.model.Account;
@@ -38,7 +41,7 @@ public class AccountDetailsFragment extends Fragment implements BanReasonFragmen
     private String email;
     private boolean adminMode;
     private Account account;
-    private FragmentAccountDetailsBinding binding;
+    private FragmentAccountDetailsBinding mBinding;
 
     public static AccountDetailsFragment newInstance(String email, boolean adminMode) {
         AccountDetailsFragment fragment = new AccountDetailsFragment();
@@ -60,8 +63,8 @@ public class AccountDetailsFragment extends Fragment implements BanReasonFragmen
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_account_details, container, false);
-        return binding.getRoot();
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_account_details, container, false);
+        return mBinding.getRoot();
     }
 
     @Override
@@ -70,34 +73,39 @@ public class AccountDetailsFragment extends Fragment implements BanReasonFragmen
         account = SqLiteStorage.getInstance().getUserByEmail(email);
         String fio = prepareText(account.getLastName()) + " " + prepareText(account.getFirstName()) + " " +
                 prepareText(account.getMiddleName());
-        binding.textViewFIO.setText(fio);
-        binding.textViewEmail.setText(prepareText(email));
-        binding.textViewNickname.setText(prepareText(account.getNickname()));
-        binding.textViewPhone.setText(prepareText(account.getPhone()));
+        mBinding.textViewFIO.setText(fio);
+        mBinding.textViewEmail.setText(prepareText(email));
+        mBinding.textViewNickname.setText(prepareText(account.getNickname()));
+        mBinding.textViewPhone.setText(prepareText(account.getPhone()));
 
-        if (account.getImage() != null) {
-            Picasso.with(getContext()).load(new File(account.getImage())).into(binding.imageView);
-        }
+        new Handler().postDelayed(() -> {
+            if (account.getImage() != null) {
+                File imgFile = new File(MyApplication.getImgPathUsers(), account.getImage());
+                if (imgFile.exists()) {
+                    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                    mBinding.imageView.setImageBitmap(myBitmap);
+                }
+            }
+        }, 300);
 
-        binding.imageView.setOnClickListener(v ->
+        mBinding.imageView.setOnClickListener(v ->
                 PickImageDialog.build(new PickSetup().setWidth(512).setHeight(512))
                         .setOnPickResult(r -> {
-                            binding.imageView.setImageBitmap(r.getBitmap());
-                            Log.d("IMAGE", "path: " + r.getPath());
-                            Log.d("URI", "uri: " + r.getUri());
-                            account.setImage(r.getPath());
+                            mBinding.imageView.setImageBitmap(r.getBitmap());
+                            String name = Utils.saveUserImage(r.getBitmap());
+                            account.setImage(name);
                             SqLiteStorage.getInstance().updateUser(account);
                         }).show(getActivity().getSupportFragmentManager()));
 
         if (adminMode && !account.isAdmin()) {
-            binding.cardViewBan.setVisibility(VISIBLE);
-            binding.textViewBan.setText(prepareBanText(account.getBannedTo()));
-            binding.imageViewRemoveBan.setOnClickListener(v -> onClickRemoveBan());
-            binding.imageViewNewBan.setOnClickListener(v -> onClickNewBan());
-            binding.imageViewBanReason.setOnClickListener(v -> onClickBanReason());
+            mBinding.cardViewBan.setVisibility(VISIBLE);
+            mBinding.textViewBan.setText(prepareBanText(account.getBannedTo()));
+            mBinding.imageViewRemoveBan.setOnClickListener(v -> onClickRemoveBan());
+            mBinding.imageViewNewBan.setOnClickListener(v -> onClickNewBan());
+            mBinding.imageViewBanReason.setOnClickListener(v -> onClickBanReason());
 
         } else {
-            binding.cardViewBan.setVisibility(GONE);
+            mBinding.cardViewBan.setVisibility(GONE);
         }
     }
 
@@ -105,21 +113,21 @@ public class AccountDetailsFragment extends Fragment implements BanReasonFragmen
         account.setBannedTo(0);
         account.setBanReason(null);
         SqLiteStorage.getInstance().updateUser(account);
-        binding.textViewBan.setText(prepareBanText(0));
+        mBinding.textViewBan.setText(prepareBanText(0));
     }
 
     private void onClickNewBan() {
         Calendar c = Calendar.getInstance();
         DatePickerDialog dialog =
-                new DatePickerDialog(binding.getRoot().getContext(), (view, year, month, dayOfMonth) -> {
+                new DatePickerDialog(mBinding.getRoot().getContext(), (view, year, month, dayOfMonth) -> {
                     Calendar newDate = Calendar.getInstance();
                     newDate.set(year, month, dayOfMonth, 0, 0, 0);
                     if (newDate.getTimeInMillis() < System.currentTimeMillis()) {
-                        Toast.makeText(binding.getRoot().getContext(), R.string.incorrect_date, Toast.LENGTH_LONG).show();
+                        Toast.makeText(mBinding.getRoot().getContext(), R.string.incorrect_date, Toast.LENGTH_LONG).show();
                     } else {
                         account.setBannedTo(newDate.getTimeInMillis());
                         SqLiteStorage.getInstance().updateUser(account);
-                        binding.textViewBan.setText(prepareBanText(newDate.getTimeInMillis()));
+                        mBinding.textViewBan.setText(prepareBanText(newDate.getTimeInMillis()));
                     }
                 }, c.get(YEAR), c.get(MONTH), c.get(DAY_OF_MONTH));
         dialog.show();
@@ -141,20 +149,19 @@ public class AccountDetailsFragment extends Fragment implements BanReasonFragmen
 
     private String prepareBanText(long date) {
         if (date == 0 && date < System.currentTimeMillis()) {
-            binding.imageViewBanReason.setVisibility(GONE);
+            mBinding.imageViewBanReason.setVisibility(GONE);
             return getString(R.string.not_banned);
         }
-        binding.imageViewBanReason.setVisibility(VISIBLE);
+        mBinding.imageViewBanReason.setVisibility(VISIBLE);
         String formattedDate = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(date);
         String reason = account.getBanReason();
         return getString(R.string.ban_info_admin, formattedDate, reason);
     }
 
-
     @Override
     public void onFinishEditDialog(String inputText) {
         account.setBanReason(inputText);
         SqLiteStorage.getInstance().updateUser(account);
-        binding.textViewBan.setText(prepareBanText(account.getBannedTo()));
+        mBinding.textViewBan.setText(prepareBanText(account.getBannedTo()));
     }
 }

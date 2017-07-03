@@ -12,6 +12,7 @@ import ua.sg.academy.havrulenko.android.sqlite.AccountDao;
 import ua.sg.academy.havrulenko.android.sqlite.HelperFactory;
 import ua.sg.academy.havrulenko.android.sqlite.PlaceDao;
 
+@SuppressWarnings("unused")
 public class SqLiteStorage {
 
     private static SqLiteStorage instance;

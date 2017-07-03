@@ -41,4 +41,13 @@
     <string name="ban_info_admin">Бан до: %1$s\n%2$s</string>
     <string name="ban_info_user">Забанен до: %1$s\nПричина: %2$s</string>
     <string name="user_photo">Фото пользователя</string>
+    <string name="add_place">Добавить место</string>
+    <string name="my_places">Мои места</string>
+    <string name="place_description">Описание</string>
+    <string name="place_select_image">Выберите изображение</string>
+    <string name="place_select_map">Выбрать место на карте</string>
+    <string name="place_title">Название</string>
+    <string name="select_place">Выбрать место</string>
+    <string name="title_activity_maps">Карта</string>
+    <string name="title_activity_select_point_on_map">Выбрать место</string>
 </resources>

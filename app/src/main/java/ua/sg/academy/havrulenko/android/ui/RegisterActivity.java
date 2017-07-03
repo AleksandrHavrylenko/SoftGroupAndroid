@@ -1,6 +1,8 @@
 package ua.sg.academy.havrulenko.android.ui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,13 +12,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
 import com.vansuita.pickimage.bundle.PickSetup;
 import com.vansuita.pickimage.dialog.PickImageDialog;
 
 import java.io.File;
 
 import ua.sg.academy.havrulenko.android.R;
+import ua.sg.academy.havrulenko.android.Utils;
 import ua.sg.academy.havrulenko.android.dao.SqLiteStorage;
 import ua.sg.academy.havrulenko.android.fragments.DialogFragment;
 
@@ -39,24 +41,26 @@ public class RegisterActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             imagePath = savedInstanceState.getString(KEY_IMAGE_PATH);
-            if(imagePath!=null) {
-                File file = new File(imagePath);
-                Picasso.with(this).load(file).into(imageViewUser);
+            if (imagePath != null) {
+                File imgFile = new File(String.valueOf(imagePath));
+                if (imgFile.exists()) {
+                    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                    imageViewUser.setImageBitmap(myBitmap);
+                }
             }
         }
 
         buttonRegister.setOnClickListener(v -> onClickRegister());
-        imageViewUser.setOnClickListener(v -> {
-            PickImageDialog.build(new PickSetup().setWidth(512).setHeight(512))
-                    .setOnPickResult(r -> {
-                        imageViewUser.setImageBitmap(r.getBitmap());
-                        Log.d("IMAGE", "path: " + r.getPath());
-                        Log.d("URI", "uri: " + r.getUri());
-                        imagePath = r.getPath();
-                    }).show(getSupportFragmentManager());
-        });
+        imageViewUser.setOnClickListener(v ->
+                PickImageDialog.build(new PickSetup().setWidth(512).setHeight(512))
+                .setOnPickResult(r -> {
+                    imageViewUser.setImageBitmap(r.getBitmap());
+                    Log.d("IMAGE", "path: " + r.getPath());
+                    Log.d("URI", "uri: " + r.getUri());
+                    imagePath = Utils.saveUserImage(r.getBitmap());
+                }).show(getSupportFragmentManager()));
     }
 
     private void findViews() {
@@ -115,6 +119,8 @@ public class RegisterActivity extends AppCompatActivity {
         java.util.regex.Matcher m = p.matcher(email);
         return m.matches();
     }
+
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

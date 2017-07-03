@@ -79,8 +79,6 @@
             android:name=".ui.MapsActivity"
             android:label="@string/title_activity_maps">
         </activity>
-        <activity android:name=".ui.MapTestActivity">
-        </activity>
         <activity
             android:name=".ui.SelectPointOnMapActivity"
             android:label="@string/title_activity_select_point_on_map">
