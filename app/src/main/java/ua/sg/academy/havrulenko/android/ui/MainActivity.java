@@ -23,7 +23,6 @@ import ua.sg.academy.havrulenko.android.model.Account;
 public class MainActivity extends AppCompatActivity {
 
     public static final String KEY_SESSION_EMAIL = "session_email";
-    private static final int REQUEST_CODE_SELECT_POINT = 0;
     private static final String TAG = MainActivity.class.getSimpleName();
     private EditText editTextEmail;
     private EditText editTextPassword;
@@ -46,21 +45,6 @@ public class MainActivity extends AppCompatActivity {
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_SELECT_POINT) {
-            if (resultCode == RESULT_OK) {
-                double x = data.getDoubleExtra(SelectPointOnMapActivity.KEY_LATITUDE, Double.NaN);
-                double y = data.getDoubleExtra(SelectPointOnMapActivity.KEY_LONGITUDE, Double.NaN);
-                Log.d(TAG, "onActivityResult: x: " + x + " y:" + y);
-            } else {
-                Log.d(TAG, "onActivityResult: " + resultCode);
-            }
-
-        }
     }
 
     private void onClickLogin() {

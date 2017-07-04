@@ -1,11 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 
-ext {
-    //dependencies
-    supportLibraryVersion = '25.3.1'
-}
-
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
@@ -33,6 +28,11 @@ android {
     }
 }
 
+ext {
+    supportLibraryVersion = '25.3.1'
+    retrofitVersion = '2.3.0'
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile group: 'commons-codec', name: 'commons-codec', version: '1.10'
@@ -43,8 +43,10 @@ dependencies {
     compile "com.android.support:support-annotations:${supportLibraryVersion}"
     compile "com.android.support:support-v4:${supportLibraryVersion}"
     compile "com.android.support:appcompat-v7:${supportLibraryVersion}"
+    compile "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    compile "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.github.jrvansuita:PickImage:2.1.2'
     compile 'com.google.android.gms:play-services-maps:11.0.2'
-
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

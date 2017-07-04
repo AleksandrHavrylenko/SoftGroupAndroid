@@ -48,6 +48,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, ConnectionSource connectionSource, int oldVer, int newVer) {
         try {
             TableUtils.dropTable(connectionSource, Account.class, true);
+            TableUtils.dropTable(connectionSource, Place.class, true);
             onCreate(db, connectionSource);
         } catch (SQLException e) {
             Log.e(TAG, "error upgrading db " + DATABASE_NAME + " from ver " + oldVer);

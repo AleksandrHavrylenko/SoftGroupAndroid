@@ -50,4 +50,8 @@
     <string name="select_place">Выбрать место</string>
     <string name="title_activity_maps">Карта</string>
     <string name="title_activity_select_point_on_map">Выбрать место</string>
+    <string name="weather_temp">Температура: %s °C</string>
+    <string name="weather_wind">Ветер: %s м/с</string>
+    <string name="weather_clouds">Облачность: %s%%</string>
+    <string name="title_activity_place_info">О месте</string>
 </resources>

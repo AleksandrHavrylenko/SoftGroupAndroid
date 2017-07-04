@@ -1,6 +1,7 @@
 package ua.sg.academy.havrulenko.android.ui;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -32,6 +33,8 @@ import ua.sg.academy.havrulenko.android.R;
 import ua.sg.academy.havrulenko.android.dao.SqLiteStorage;
 import ua.sg.academy.havrulenko.android.model.Account;
 import ua.sg.academy.havrulenko.android.model.Place;
+
+import static ua.sg.academy.havrulenko.android.ui.PlaceInfoActivity.KEY_PLACE_ID;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -103,6 +106,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public View getInfoContents(Marker marker) {
                 return getInfoWindow(marker);
             }
+        });
+
+        mMap.setOnInfoWindowClickListener(marker -> {
+            int placeId = Integer.parseInt(marker.getSnippet());
+            Intent intent = new Intent(MapsActivity.this, PlaceInfoActivity.class);
+            intent.putExtra(KEY_PLACE_ID, placeId);
+            startActivity(intent);
         });
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

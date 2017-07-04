@@ -29,7 +29,7 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="128dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginLeft="8dp"
@@ -88,7 +88,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_mail_outline"/>
+                    app:srcCompat="@drawable/ic_mail_outline"
+                    android:layout_marginStart="8dp"/>
 
                 <TextView
                     android:id="@+id/textViewEmail"
@@ -101,7 +102,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/imageView2"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="test@mail.com"/>
+                    tools:text="test@mail.com"
+                    android:layout_marginStart="8dp"/>
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.CardView>
 
@@ -131,7 +133,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_adb"/>
+                    app:srcCompat="@drawable/ic_adb"
+                    android:layout_marginStart="8dp"/>
 
                 <TextView
                     android:id="@+id/textViewNickname"
@@ -144,7 +147,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/imageView22"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="user_nickname"/>
+                    tools:text="user_nickname"
+                    android:layout_marginStart="8dp"/>
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.CardView>
 
@@ -174,7 +178,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_phone" />
+                    app:srcCompat="@drawable/ic_phone"
+                    android:layout_marginStart="8dp"/>
 
                 <TextView
                     android:id="@+id/textViewPhone"
@@ -187,7 +192,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/imageView23"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="0997777777"/>
+                    tools:text="0997777777"
+                    android:layout_marginStart="8dp"/>
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.CardView>
 
@@ -216,7 +222,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@mipmap/ic_ban"/>
+                    app:srcCompat="@mipmap/ic_ban"
+                    android:layout_marginStart="8dp"/>
 
                 <ImageView
                     android:id="@+id/imageViewNewBan"
@@ -242,7 +249,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_remove"/>
+                    app:srcCompat="@drawable/ic_remove"
+                    android:layout_marginEnd="8dp"/>
 
                 <ImageView
                     android:id="@+id/imageViewBanReason"
@@ -269,7 +277,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/imageView24"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Ban to: 22.11.2022"/>
+                    tools:text="Ban to: 22.11.2022"
+                    android:layout_marginStart="8dp"/>
 
 
             </android.support.constraint.ConstraintLayout>

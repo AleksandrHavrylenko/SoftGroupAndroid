@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,9 +47,7 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
         holder.mBinding.imageViewRemove.setVisibility(account.isAdmin() ? View.GONE : View.VISIBLE);
 
         if (account.getImage() != null) {
-            Log.d("IMAGE", "onBindViewHolder: " + account.getImage());
             File imgFile=new File(MyApplication.getImgPathUsers(), account.getImage());
-           // File imgFile = new File(String.valueOf(account.getImage()));
             if (imgFile.exists()) {
                 Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 holder.mBinding.imageViewUserPicture.setImageBitmap(myBitmap);
